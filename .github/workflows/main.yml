@@ -29,4 +29,4 @@ jobs:
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
           source: dist/
-          destination: gs://your-bucket-name/
+          destination: gs://angularbucket_example/
