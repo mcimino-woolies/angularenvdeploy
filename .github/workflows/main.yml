@@ -30,4 +30,4 @@ jobs:
           credentials: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           path: dist/
-          destination: gs://angularbucket_example/
+          destination: angularbucket_example
