@@ -25,8 +25,8 @@ jobs:
         run: npm run build -- --prod
 
       - name: Upload to GCS
-        uses: google-github-actions/upload-cloud-storage@master
+        uses: google-github-actions/upload-cloud-storage@v3
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
           source: dist/
-          destination: gs://angularbucket_example/
+          destination: gs://your-bucket-name/
