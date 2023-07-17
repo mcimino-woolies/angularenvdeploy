@@ -32,7 +32,7 @@ jobs:
           echo "${secrets.GCP_SA_KEY// /}" | base64 --decode > key.json
       
       - name: Check Keys
-        run: cat key.json
+        run: echo "${{ secrets.GCP_SA_KEY }}"
 
       - name: Deploy to GCS 
         run: |
