@@ -30,7 +30,9 @@ jobs:
       - name: Authenticate with Google Cloud
         run: |
           echo "${secrets.GCP_SA_KEY// /}" | base64 --decode > key.json
-
+      
+      - name: Check Keys
+        run: cat key.json
 
       - name: Deploy to GCS 
         run: |
