@@ -25,7 +25,7 @@ jobs:
         run: npm ci
         
       - name: Build Angular app
-        run: ng build --configuration=production --output-path=dist/
+        run: ng build --configuration=production --output-path=dist/ --base-href /angularbucket_example/
         
       - name: Check index.html
         run: cat dist/index.html
