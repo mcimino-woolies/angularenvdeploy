@@ -32,6 +32,6 @@ jobs:
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          source: dist/angularenvdeploy/**
+          path: dist/angularenvdeploy
           destination: angularbucket_example
           parent: false
