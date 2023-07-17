@@ -32,6 +32,6 @@ jobs:
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          path: dist/
+          path: banana/
           glob: '**/*'
           destination: angularbucket_example
