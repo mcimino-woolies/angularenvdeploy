@@ -29,10 +29,10 @@ jobs:
 
       - name: Authenticate with Google Cloud
         run: |
-          echo -n "${{ secrets.GCP_SA_KEY }}" | base64 --decode > key.json
+          echo "${secrets.GCP_SA_KEY// /}" | base64 --decode > key.json
 
 
-      - name: Deploy to GCS
+      - name: Deploy to GCS 
         run: |
           gcloud auth activate-service-account --key-file=key.json
           gsutil -m cp -r dist/* gs://angularbucket_example
