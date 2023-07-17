@@ -35,7 +35,7 @@ jobs:
 
 
       - name: Deploy to GCS
-        run: gsutil -m cp -r dist/* gs://my-bucket
+        run: gsutil -m cp -r dist/* gs://angularbucket_example
         env:
           GOOGLE_APPLICATION_CREDENTIALS: key.json
 
