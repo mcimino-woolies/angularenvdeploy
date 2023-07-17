@@ -25,17 +25,12 @@ jobs:
         run: npm ci
         
       - name: Build Angular app
-        run: ng build --configuration=production --output-path=dist/ --base-href /angularbucket_example/
-        
-      - name: Check index.html
-        run: cat dist/index.html
-        
-      - name: Authenticate with Google Cloud
-        run: echo "${{ secrets.GCP_SA_KEY }}" > key.json
+        run: ng build --configuration=production --output-path=dist/
 
+      - name: Authenticate with Google Cloud
+        run: echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > key.json
 
       - name: Deploy to GCS
-        run: gsutil -m cp -r dist/* gs://angularbucket_example
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: key.json
-
+        run: |
+          gcloud auth activate-service-account --key-file=key.json
+          gsutil -m cp -r dist/* gs://angularbucket_example
