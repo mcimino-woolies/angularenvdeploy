@@ -25,7 +25,7 @@ jobs:
         run: npm ci
         
       - name: Build Angular app
-        run: ng build --configuration=production
+        run: ng build --configuration=production --base-href /angularbucket_example/angularenvdeploy/
 
       - name: Upload to GCS
         uses: google-github-actions/upload-cloud-storage@v0
