@@ -25,13 +25,13 @@ jobs:
         run: npm ci
         
       - name: Build Angular app
-        run: ng build --configuration=production --output-path=dist/angularenvdeploy --base-href //angularbucket_example/
+        run: ng build --configuration=production --output-path=dist/angularenvdeploy --base-href /angularbucket_example/dist/angularenvdeploy/
 
       - name: Upload to GCS
         uses: google-github-actions/upload-cloud-storage@v0
         with:
           credentials: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          path: dist/angularenvdeploy/
-          destination: angularbucket_example/angularenvdeploy
+          source: dist/angularenvdeploy/**
+          destination: angularbucket_example
           parent: false
