@@ -1,0 +1,32 @@
+name: Build and Deploy Angular App to GCS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular app
+        run: npm run build -- --prod
+
+      - name: Upload to GCS
+        uses: google-github-actions/upload-cloud-storage@master
+        with:
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          source: dist/
+          destination: gs://your-bucket-name/
