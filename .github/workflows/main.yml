@@ -26,6 +26,9 @@ jobs:
         
       - name: Build Angular app
         run: ng build --configuration=production --output-path=dist/
+        
+      - name: Check index.html
+        run: cat dist/index.html
 
       - name: Upload to GCS
         uses: google-github-actions/upload-cloud-storage@v0
