@@ -28,7 +28,7 @@ jobs:
         run: ng build --configuration=production --output-path=dist/
 
       - name: Authenticate with Google Cloud
-        run: echo "$secrets.GCP_SA_KEY" | base64 --decode > key.json
+        run: echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > key.json
 
       - name: Deploy to GCS 
         run: |
