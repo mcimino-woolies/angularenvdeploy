@@ -34,3 +34,4 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           path: dist/
           destination: angularbucket_example
+          parent: false
