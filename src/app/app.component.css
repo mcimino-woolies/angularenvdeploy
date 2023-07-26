@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-toolbar {
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-card {
+  max-width: 400px;
+}

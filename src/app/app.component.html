@@ -1,1 +1,15 @@
-{{title}}
+<mat-toolbar color="primary">
+  <span>Welcome to {{ title }}!</span>
+  <span class="spacer"></span>
+  <span>API: {{ apiUrl }}</span>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Environment Details</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>Google Analytics ID: {{ googleAnalyticsId }}</p>
+  </mat-card-content>
+</mat-card>
