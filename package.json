@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "generate-env": "ts-node --compiler-options \"{\\\"module\\\": \\\"commonjs\\\"}\" envSetup.ts",
-    "generate-env:dev": "npm run generate-env -- development",
+    "generate-env:development": "npm run generate-env -- development",
     "generate-env:staging": "npm run generate-env -- staging",
     "generate-env:prod": "npm run generate-env -- prod"
   },

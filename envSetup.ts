@@ -10,10 +10,6 @@ if (!name) {
 
 const envFilePath = '.env';
 
-if (!existsSync(envFilePath)) {
-  throw new Error(`Environment file not found: ${envFilePath}`);
-}
-
 let envConfig: any;
 if (existsSync(envFilePath)) {
   envConfig = dotenv.config().parsed;
