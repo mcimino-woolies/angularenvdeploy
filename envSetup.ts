@@ -10,7 +10,7 @@ if (!name) {
 
 const envFilePath = '.env';
 
-let envConfig: any;
+let envConfig: any = {};
 if (existsSync(envFilePath)) {
   envConfig = dotenv.config().parsed;
 }
