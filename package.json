@@ -10,7 +10,7 @@
     "generate-env": "ts-node --compiler-options \"{\\\"module\\\": \\\"commonjs\\\"}\" envSetup.ts",
     "generate-env:development": "npm run generate-env -- development",
     "generate-env:staging": "npm run generate-env -- staging",
-    "generate-env:prod": "npm run generate-env -- prod"
+    "generate-env:production": "npm run generate-env -- production"
   },
   "private": true,
   "dependencies": {
