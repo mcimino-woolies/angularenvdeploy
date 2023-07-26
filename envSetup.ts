@@ -19,6 +19,7 @@ const getValue = (key: string) => {
   return envConfig[key] || process.env[`${name.toUpperCase()}_${key}`] || '';
 };
 const fileName = `src/environments/environment.${name}.ts`;
+console.log(process.env[`${name.toUpperCase()}_NAME`])
 if (!existsSync(fileName)) {
   const env: Environment = {
     production: name === 'prod',
