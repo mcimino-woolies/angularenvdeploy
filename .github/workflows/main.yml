@@ -28,7 +28,14 @@ jobs:
 
       - name: Generate Environment
         run: npm run generate-env:${{ matrix.env }}
-        
+        env:
+          DEVELOPMENT_NAME: ${{ vars.DEVELOPMENT_NAME }}
+          STAGING_NAME: ${{ vars.STAGING_NAME }}
+          PRODUCTION_NAME: ${{ vars.PRODUCTION_NAME }}
+          
+      - name: Display environment.${{ matrix.env }}.ts
+        run: cat src/environments/environment.${{ matrix.env }}.ts
+          
       - name: Build Angular app
         run: ng build --configuration=${{ matrix.env }} --output-path=dist/ --base-href /angular_bucket_${{ matrix.env }}/
 
