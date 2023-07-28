@@ -8,26 +8,15 @@ if (!name) {
   throw new Error('Please specify an environment name');
 }
 
-const envFilePath = '.env';
+dotenv.config();
 
-let envConfig: any = {};
-if (existsSync(envFilePath)) {
-  envConfig = dotenv.config().parsed;
-}
-
-const getValue = (key: string) => {
-  return envConfig[key] || process.env[`${name.toUpperCase()}_${key}`] || '';
-};
 const fileName = `src/environments/environment.${name}.ts`;
-console.log(process.env[`${name.toUpperCase()}_NAME`])
+
 if (!existsSync(fileName)) {
   const env: Environment = {
     production: name === 'prod',
-    title: getValue('TITLE'),
-    apiUrl: getValue('API_URL'),
-    googleAnalyticsId: getValue('GA_ID'),
-    featureToggle: getValue('TOGGLE'),
-    specialMessage: getValue('SPECIAL_MSG'),
+    title: process.env?.['TITLE'] ?? '',
+    iframeUrl: process.env?.['IFRAME'] ?? ''
   };
   const content = `import { Environment } from './environment.interface';\n\nexport const environment: Environment = ${toTypeScriptObject(
     env
