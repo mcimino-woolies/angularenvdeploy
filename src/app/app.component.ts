@@ -15,7 +15,6 @@ export class AppComponent {
 
   constructor(private sanitizer: DomSanitizer) {
     this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.iframeUrl);
-    // Assuming a URL is valid if it's a non-empty string
     this.isUrlProvided = environment.iframeUrl.trim() !== '';
   }
 }
