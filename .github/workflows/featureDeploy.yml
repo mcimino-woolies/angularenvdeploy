@@ -11,7 +11,6 @@ jobs:
     strategy:
       matrix:
         env: ['development', 'staging', 'production']
-  
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,33 +19,34 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-
+      
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
       - name: Install dependencies
         run: npm ci
-        
-      - name: Access URL Parameter
-        run: echo ${{ github.event.client_payload.url }}
+
+      - name: Convert env to uppercase
+        id: convert
+        run: |
+          echo "::set-output name=ENV_UPPER::$(echo ${{ matrix.env }} | tr '[:lower:]' '[:upper:]')"
 
       - name: Generate Environment
         run: npm run generate-env:${{ matrix.env }}
         env:
-          DEVELOPMENT_NAME: ${{ secrets.DEVELOPMENT_NAME }}
-          STAGING_NAME: ${{ secrets.STAGING_NAME }}
-          PRODUCTION_NAME: ${{ secrets.PRODUCTION_NAME }}
-      
+          TITLE: ${{ vars[format('{0}_TITLE', steps.convert.outputs.ENV_UPPER)] }}
+          IFRAME: ${{ github.event.client_payload.url }}
+          
       - name: Display environment.${{ matrix.env }}.ts
         run: cat src/environments/environment.${{ matrix.env }}.ts
-      
+          
       - name: Build Angular app
         run: ng build --configuration=${{ matrix.env }} --output-path=dist/ --base-href /angular_bucket_${{ matrix.env }}/
-      
+
       - name: Authenticate with Google Cloud
         run: echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > key.json
-      
-      - name: Deploy to GCS
+
+      - name: Deploy to GCS 
         run: |
           gcloud auth activate-service-account --key-file=key.json
           gsutil -m cp -r dist/* gs://angular_bucket_${{ matrix.env }}
