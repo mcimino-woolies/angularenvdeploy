@@ -1,0 +1,34 @@
+.centered-title {
+  width: 100%;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.large-card {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card-header {
+  flex-shrink: 0;
+}
+
+.iframe-container {
+  flex-grow: 1;
+  display: flex;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

@@ -1,15 +1,14 @@
 <mat-toolbar color="primary">
-  <span>Welcome to {{ title }}!</span>
-  <span class="spacer"></span>
-  <span>API: {{ apiUrl }}</span>
+  <div class="centered-title">{{title}}</div>
 </mat-toolbar>
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Environment Details</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-    <p>Google Analytics ID: {{ googleAnalyticsId }}</p>
-  </mat-card-content>
-</mat-card>
+<div class="container" *ngIf="isUrlProvided">
+  <mat-card class="large-card">
+    <mat-card-header>
+      <mat-card-title>Interactive Content</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="iframe-container">
+      <iframe [src]="iframeUrl" width="100%" height="100%"></iframe>
+    </mat-card-content>
+  </mat-card>
+</div>

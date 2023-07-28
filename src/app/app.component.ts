@@ -1,23 +1,21 @@
-import {Component, HostBinding} from '@angular/core';
+// app.component.ts
+import { Component } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
-import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  animations: [
-    trigger('fadeInOut', [
-      state('void', style({
-        opacity: 0
-      })),
-      transition('void <=> *', animate(1000)),
-    ]),
-  ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = environment.name;
-  apiUrl = ''
-  googleAnalyticsId = ''
-  @HostBinding('@fadeInOut') animate = true;
+  title = `Welcome to the ${environment.title} bucket`;
+  iframeUrl: SafeResourceUrl;
+  isUrlProvided: boolean;
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.iframeUrl);
+    // Assuming a URL is valid if it's a non-empty string
+    this.isUrlProvided = environment.iframeUrl.trim() !== '';
+  }
 }

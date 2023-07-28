@@ -23,7 +23,11 @@ console.log(process.env[`${name.toUpperCase()}_NAME`])
 if (!existsSync(fileName)) {
   const env: Environment = {
     production: name === 'prod',
-    name: getValue('NAME')
+    title: getValue('TITLE'),
+    apiUrl: getValue('API_URL'),
+    googleAnalyticsId: getValue('GA_ID'),
+    featureToggle: getValue('TOGGLE'),
+    specialMessage: getValue('SPECIAL_MSG'),
   };
   const content = `import { Environment } from './environment.interface';\n\nexport const environment: Environment = ${toTypeScriptObject(
     env

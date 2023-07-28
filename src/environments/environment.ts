@@ -2,5 +2,9 @@ import {Environment} from "./environment.interface";
 
 export const environment: Environment = {
   production: false,
-  name: ''
+  title: '',
+  apiUrl: '',
+  googleAnalyticsId: '',
+  featureToggle: '',
+  specialMessage: ''
 }
