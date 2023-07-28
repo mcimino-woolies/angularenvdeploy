@@ -26,11 +26,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Convert env to uppercase
+        id: convert
+        run: |
+          echo "::set-output name=ENV_UPPER::$(echo ${{ matrix.env }} | tr '[:lower:]' '[:upper:]')"
+
       - name: Generate Environment
         run: npm run generate-env:${{ matrix.env }}
         env:
-          NAME: ${{ vars[`${{ matrix.env }}_name`] }}
-          IFRAME: ${{ vars[`${{ matrix.env }}_iframe`] }}
+          NAME: ${{ secrets[format('{0}_NAME', steps.convert.outputs.ENV_UPPER)] }}
+          IFRAME: ${{ secrets[format('{0}_IFRAME', steps.convert.outputs.ENV_UPPER)] }}
           
       - name: Display environment.${{ matrix.env }}.ts
         run: cat src/environments/environment.${{ matrix.env }}.ts
