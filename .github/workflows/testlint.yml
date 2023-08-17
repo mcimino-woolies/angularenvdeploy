@@ -19,8 +19,22 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Convert env to uppercase
+        id: convert
+        run: |
+          echo "::set-output name=ENV_UPPER::$(echo development | tr '[:lower:]' '[:upper:]')"
+
+      - name: Generate Environment
+        run: npm run generate-env:development
+        env:
+          TITLE: ${{ vars[format('{0}_TITLE', steps.convert.outputs.ENV_UPPER)] }}
+          IFRAME: ${{ vars[format('{0}_IFRAME', steps.convert.outputs.ENV_UPPER)] }}
 
       - name: Run Linting
         run: npm run lint
