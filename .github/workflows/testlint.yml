@@ -40,7 +40,7 @@ jobs:
         run: npm run lint
 
       - name: Run Tests
-        run: npm test
+        run: ng test --watch=false --browsers=ChromeHeadless
 
       - name: Set PR status - Success
         uses: actions/github-script@v4
