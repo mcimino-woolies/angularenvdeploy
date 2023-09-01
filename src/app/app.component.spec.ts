@@ -6,11 +6,13 @@ describe('AppComponent', () => {
     declarations: [AppComponent]
   }));
 
-  it('should create the app', () => {
+for (let i = 1; i <= 50; i++) {
+  it(`should create the app ${i}`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
+}
 
   it(`should have as title 'angularenvdeploy'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
