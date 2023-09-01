@@ -1,43 +1,29 @@
-name: PR Checks
+name: PR Check
 
 on:
+  push:
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master, develop, feature/*, bug/*, fix/*]
 
 jobs:
   build:
-    name: Run Tests and Linting
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [18.16.1]
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 18
-
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
-
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://npm.pkg.github.com'
       - name: Install dependencies
-        run: npm ci
-
-      - name: Convert env to uppercase
-        id: convert
-        run: |
-          echo "::set-output name=ENV_UPPER::$(echo development | tr '[:lower:]' '[:upper:]')"
-
-      - name: Generate Environment
-        run: npm run generate-env:development
         env:
-          TITLE: ${{ vars[format('{0}_TITLE', steps.convert.outputs.ENV_UPPER)] }}
-          IFRAME: ${{ vars[format('{0}_IFRAME', steps.convert.outputs.ENV_UPPER)] }}
-
-      - name: Run Linting
-        run: npm run lint
-
-      - name: Run Tests
-        run: ng test --watch=false --browsers=ChromeHeadless
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm ci
+      - run: npm run test-ci
+      - run: npm run lint
+      - run: npm run build
