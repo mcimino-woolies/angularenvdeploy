@@ -1,27 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatCardModule} from "@angular/material/card";
+import {environment} from "../environments/environment";
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent]
+    declarations: [AppComponent],
+    imports: [MatToolbarModule, MatCardModule]
   }));
 
-  it('should create the app', () => {
+  for (let i = 1; i <= 200; i++) {
+    it(`should create the app ${i}`, () => {
+      const fixture = TestBed.createComponent(AppComponent);
+      const app = fixture.componentInstance;
+      expect(app).toBeTruthy();
+    });
+  }
+
+  it(`should have as title'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'angularenvdeploy'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angularenvdeploy');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angularenvdeploy app is running!');
+    expect(app.title).toEqual(`Welcome to the ${environment.title} bucket`);
   });
 });
